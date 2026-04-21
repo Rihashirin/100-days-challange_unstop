@@ -1,0 +1,119 @@
+👉Day 01 - Chessboard Cell Color
+
+👉Problem Statement
+Given a coordinate in the form of a string (like "a1", "b2"), determine whether the cell is **Black** or **White** on a chessboard.
+https://unstop.com/code/challenge-assessment/250904?moduleId=372
+
+
+👉Input Format
+- A string `s` of length 2
+- First character: column (a–h)
+- Second character: row (1–8)
+
+
+👉Output Format
+- Print `"Black"` or `"White"`
+
+
+👉Sample Testcases
+
+Example 1
+Input:
+a1  
+Output:
+Black  
+
+Example 2
+Input:
+b2  
+Output:
+Black  
+
+Example 3
+Input:
+a2  
+Output:
+White  
+
+
+👉Logic / Approach
+
+Take the input string (example: "b2")
+Split it:
+    First character → column (letter)
+    Second character → row (number)
+Convert the column letter to a number:
+    a = 1, b = 2, c = 3, … h = 8
+Convert the row character to an integer:
+    '1' → 1, '2' → 2, etc.
+Add both values:
+      sum = column + row
+Check the sum:
+    If sum is even → Black
+    If sum is odd → White
+Example
+"a1" → 1 + 1 = 2 → even → Black
+"b2" → 2 + 2 = 4 → even → Black
+"a2" → 1 + 2 = 3 → odd → White
+
+
+👉Code Logic Flow
+
+Get input string
+Store input like "b2"
+
+Extract characters
+char colChar = s.charAt(0);   // 'b'
+char rowChar = s.charAt(1);   // '2'
+
+Convert column (letter → number)
+int col = colChar - 'a' + 1;
+ 'b' - 'a' = 1 → +1 = 2
+
+Convert row (char → int)
+int row = rowChar - '0';
+'2' - '0' = 2
+
+Add both
+int sum = col + row;
+
+Check condition
+if (sum % 2 == 0)
+    return "Black";
+else
+    return "White";
+
+
+👉CODE(java)
+
+import java.util.Scanner;
+
+public class Main {
+    public static String determineColor(String s) {
+        char colChar = s.charAt(0);   // column letter
+        char rowChar = s.charAt(1);   // row number
+
+        int col = colChar - 'a' + 1;  // convert letter to number
+        int row = rowChar - '0';      // convert char to int
+
+        int sum = col + row;
+
+        if (sum % 2 == 0)
+            return "Black";
+        else
+            return "White";
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine().trim();
+        String result = determineColor(s);
+        System.out.println(result);
+    }
+}
+
+
+👉CODE(Logic)
+
+return ((s.charAt(0) - 'a' + 1 + s.charAt(1) - '0') % 2 == 0) ? "Black" : "White";
+
